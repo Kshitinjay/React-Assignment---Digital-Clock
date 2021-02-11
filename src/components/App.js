@@ -3,14 +3,16 @@ import "../styles/App.css";
 
 const App = () => {
   let time = new Date().toLocaleTimeString();
-  const [showTime,setShowTime] = useState(time);
-    setInterval(()=>{
-        time = new Date().toLocaleTimeString();
-        setShowTime(time);
-    },1000);
-  return <div>
-      <p>{showTime}</p>
-  </div>;
+  const [showTime, setShowTime] = useState(time);
+  setInterval(() => {
+    time = new Date().toLocaleTimeString();
+    setShowTime(time);
+  }, 1000);
+  return (
+    <div className="Clock">
+        <h3 id="time">{showTime}</h3>
+    </div>
+  );
 };
 
 export default App;
