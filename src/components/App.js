@@ -1,18 +1,35 @@
 import React, { Component, useState } from "react";
 import "../styles/App.css";
 
-const App = () => {
-  let time = new Date().toLocaleTimeString();
-  const [showTime, setShowTime] = useState(time);
-  setInterval(() => {
-    time = new Date().toLocaleTimeString();
-    setShowTime(time);
-  }, 1000);
-  return (
-    <div className="Clock">
-        <h3 id="time">{showTime}</h3>
-    </div>
-  );
-};
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      time: new Date().toLocaleTimeString(),
+    };
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      time: new Date().toLocaleTimeString(),
+    });
+  }
+
+  render() {
+    return (
+      <div className="Clock">
+        <h3 id="time">{this.state.time}</h3>
+      </div>
+    );
+  }
+}
 
 export default App;
